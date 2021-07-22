@@ -26,7 +26,11 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
                 Field valueField = beanClass.getDeclaredField("value");
                 valueField.setAccessible(true);
                 int value = (Integer) valueField.get(bean);
-                ((Validator) bean).validate(className, name, value);
+                try {
+                    ((Validator) bean).validate(className, name, value);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             }

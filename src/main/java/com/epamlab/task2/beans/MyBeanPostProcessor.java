@@ -28,7 +28,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
                 int value = (Integer) valueField.get(bean);
                 try {
                     ((Validator) bean).validate(className, name, value);
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
             } catch (NoSuchFieldException | IllegalAccessException e) {
